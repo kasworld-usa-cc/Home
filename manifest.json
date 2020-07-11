@@ -1,6 +1,7 @@
 {
   "short_name": "KASWORLD",
   "name": "KASWORLD",
+  "description": "KASWORLD-AERO Aviation Updates and Flight Informomations",
   "theme_color": "#4A90E2",
   "background_color": "#F7F8F9",
   "display": "standalone",
@@ -27,4 +28,6 @@
     }
   ],
   "start_url": "https://kasworld-aero.blogspot.com/?utm_source=launcher"
+  "gcm_sender_id": "416540625547",
+    "gcm_user_visible_only": true
 }
