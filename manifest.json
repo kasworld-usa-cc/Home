@@ -1,6 +1,6 @@
 {
   "short_name": "KASWORLD",
-  "name": "KASWORLD",
+  "name": "KASWORLD-AERO",
   "description": "KASWORLD-AERO Aviation Updates and Flight Informomations",
   "theme_color": "#4A90E2",
   "background_color": "#F7F8F9",
@@ -25,9 +25,14 @@
       "src": "https://3.bp.blogspot.com/-LWBcmlIv6HY/XwlEqx7LUMI/AAAAAAAAFNg/hFI24yPnk6EsQqjSTMHCKAvlK2HApklDACPcBGAsYHg/s192/K-A-Logo.png.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+     {
+      "src": "https://3.bp.blogspot.com/-LWBcmlIv6HY/XwlEqx7LUMI/AAAAAAAAFNg/hFI24yPnk6EsQqjSTMHCKAvlK2HApklDACPcBGAsYHg/s512/K-A-Logo.png.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "https://kasworld-aero.blogspot.com/?utm_source=launcher"
+  "start_url": "./aero.html?utm_source=launcher"
   "gcm_sender_id": "416540625547",
     "gcm_user_visible_only": true
 }
