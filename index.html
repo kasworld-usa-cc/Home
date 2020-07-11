@@ -2,7 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>KASWORLD-AERO</title>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KASWORLD">
+    <meta name="application-name" content="KASWORLD">
 	<link rel="manifest" href="https://kasworld-aero.github.io/home/manifest.json">
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  
+	  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-messaging.js"></script>
 <style type='text/css'>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -346,13 +356,7 @@ Cari
 
 </div>
 	
-	<div class="column">
-
-<h2>Upcoming</h2>
-		<p>Under Cunstruction</p>
 	
-		
-</div>
   
   <div class="column">
 		<h2>AMAZON SELL OFFER</h2>
@@ -362,12 +366,16 @@ Cari
 </section>	
 	
 	<footer>
-		<h3><br/></h3>
+		<center><h3>Go Offline & hit this button <button onclick="registerSync()">Trigger Offline Action</button><br/><br/><br/><br/></h3></center>
 		<center> &copy; Copyright 2010-<script>document.write(new Date().getFullYear())</script>, Kasworld-Aero </center>
 	</footer>
 
 </div>
-
+<script src="./js/notify.js"></script>
+    <script src="https://kasworld-aero.github.io/home/networkChange.js"></script>
+    <script defer src="https://kasworld-aero.github.io/home/push.js"></script>
+    <script src="https://kasworld-aero.github.io/home/sync.js"></script>
+    <script defer src="https://kasworld-aero.github.io/home/app.js"></script>
 <script>
  if ('serviceWorker' in navigator) {
     console.log("Will the service worker register?");
