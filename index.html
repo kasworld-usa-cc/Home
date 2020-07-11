@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>KASWORLD-AERO</title>
+<style type='text/css'>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+* { box-sizing: border-box; }
+
+body { 
+  font-family: 'Open Sans', sans-serif;
+  color: #666;
+}
+
+/* STRUCTURE */
+
+.wrapper {
+	padding: 5px;
+	max-width: 960px;
+	width: 95%;
+	margin: 20px auto;
+}
+header {
+	padding: 0 15px;
+}
+
+.columns {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin: 5px 0;
+}
+
+.column {
+	flex: 1;
+	border: 1px solid gray;
+	margin: 2px;
+	padding: 10px;
+	&:first-child { margin-left: 0; }
+	&:last-child { margin-right: 0; }
+	
+}
+
+footer {
+	padding: 0 15px;
+}
+
+
+@media screen and (max-width: 980px) {
+  .columns .column {
+		margin-bottom: 5px;
+    flex-basis: 40%;
+		&:nth-last-child(2) {
+			margin-right: 0;
+		}
+		&:last-child {
+			flex-basis: 100%;
+			margin: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.columns .column {
+		flex-basis: 100%;
+		margin: 0 0 5px 0;
+	}
+}
+
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+	<header>
+		<h1>KASWORLD-AERO
+</h1>
+	</header>
+		
+<section class="columns">
+	
+	<div class="column">
+		<h2>ALL AVIATION UPDATES</h2>
+			 <!--Start Kasworld-aero-->
+            <script type='text/javascript'>
+var numfeed = 7;
+var startfeed = 0;
+var urlblog = "https://kasworld-aero.blogspot.com/";
+var charac = 100;
+var urlprevious, urlnext;
+
+function cyberghost(ghost, banget) {
+  var showfeed = ghost.split("<");
+  for (var i = 0; i < showfeed.length; i++) {
+    if (showfeed[i].indexOf(">") != -1) {
+      showfeed[i] = showfeed[i].substring(showfeed[i].indexOf(">") + 1, showfeed[i].length);
+    }
+  }
+  showfeed = showfeed.join("");
+  showfeed = showfeed.substring(0, banget - 1);
+  return showfeed;
+}
+
+function showterbaru(json) {
+  var entry, posttitle, posturl, postimg, postcontent;
+  var showblogfeed = "";
+  urlprevious = "";
+  urlnext = "";
+  for (var k = 0; k < json.feed.link.length; k++) {
+    if (json.feed.link[k].rel == 'previous') {
+      urlprevious = json.feed.link[k].href;
+    }
+    if (json.feed.link[k].rel == 'next') {
+      urlnext = json.feed.link[k].href;
+    }
+  }
+  for (var i = 0; i < numfeed; i++) {
+    if (i == json.feed.entry.length) {
+      break;
+    }
+    entry = json.feed.entry[i];
+    posttitle = entry.title.$t;
+    for (var k = 0; k < entry.link.length; k++) {
+      if (entry.link[k].rel == 'alternate') {
+        posturl = entry.link[k].href;
+        break;
+      }
+    }
+    if ("content" in entry) {
+      postcontent = entry.content.$t;
+    } else if ("summary" in entry) {
+      postcontent = entry.summary.$t;
+    } else {
+      postcontent = "";
+    }
+    if ("media$thumbnail" in entry) {
+      postimg = entry.media$thumbnail.url;
+    } else {
+      postimg = "https://1.bp.blogspot.com/-eiX9aalicz8/VWEORfDN71I/AAAAAAAAHdg/vfHyEfYKBh0/s1600/no_image.gif";
+    }
+    showblogfeed += "<div class='cg-elemen'>";
+    showblogfeed += "<a =href='" + posturl + "' target='_blank'><img src='" + postimg + "' /></a>";
+    showblogfeed += "<h6><a href='" + posturl + "'>" + posttitle + "</a></h6>";
+    showblogfeed += "<p>" + cyberghost(postcontent, charac) + "...</p>";
+    showblogfeed += "</div>";
+  }
+  document.getElementById("terbaru").innerHTML = showblogfeed;
+  showblogfeed = "";
+  if (urlprevious) {
+    showblogfeed += "<a href='javascript:navigasifeed(-1);' class='previous'>&#9668; Previous</a>";
+  } else {
+    showblogfeed += "<span class='noactived previous'>&#9668; Previous</span>";
+  }
+  if (urlnext) {
+    showblogfeed += "<a href='javascript:navigasifeed(1);' class='next'>Next &#9658;</a>";
+  } else {
+    showblogfeed += "<span class='noactived next'>Next &#9658;</span>";
+  }
+  showblogfeed += "<a href='javascript:navigasifeed(0);' class='home'>Home</a>";
+  document.getElementById("cg-navigasifeed").innerHTML = showblogfeed;
+}
+
+function navigasifeed(url) {
+  var p, parameter;
+  if (url == -1) {
+    p = urlprevious.indexOf("?");
+    parameter = urlprevious.substring(p);
+  } else if (url == 1) {
+    p = urlnext.indexOf("?");
+    parameter = urlnext.substring(p);
+  } else {
+    parameter = "?start-index=1&max-results=" + numfeed + "&orderby=published&alt=json-in-script"
+  }
+  parameter += "&callback=showterbaru";
+  incluirscript(parameter);
+}
+
+function incluirscript(parameter) {
+  if (startfeed == 1) {
+    removerscript();
+  }
+  document.getElementById("terbaru").innerHTML = "<div id='cg-loading'></div>";
+  document.getElementById("cg-navigasifeed").innerHTML = "";
+  var archievefeed = urlblog + "/feeds/posts/default" + parameter;
+  var terbaru = document.createElement('script');
+  terbaru.setAttribute('type', 'text/javascript');
+  terbaru.setAttribute('src', archievefeed);
+  terbaru.setAttribute('id', 'MASLABEL');
+  document.getElementsByTagName('head')[0].appendChild(terbaru);
+  startfeed = 1;
+}
+
+function removerscript() {
+  var elemen = document.getElementById("MASLABEL");
+  var parent = elemen.parentNode;
+  parent.removeChild(elemen);
+}
+onload = function() {
+  navigasifeed(0);
+}
+</script>
+<style>
+/*Recent Post Navigation*/
+a,
+a:visited {
+  color: #555;
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:visited:hover {
+  color: #22a1c4;
+  text-decoration: none;
+}
+
+.terbaru-container {
+  background: #fff;
+  width: 320px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+
+#cg-terbaru {
+  border: 1px solid #585858;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#terbaru {
+  margin: 0px;
+}
+
+.cg-elemen {
+  margin: 5px 0;
+  padding: 5px;
+  height: 79px;
+  background: #FFF url("https://smruthycollege.com/images/shadow2.png") no-repeat scroll center bottom;
+overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.cg-elemen img {
+  padding: 0;
+  float: left;
+  height: 70px;
+  margin-right: 15px;
+  width: 70px;
+}
+
+.cg-elemen h6,
+.cg-elemen h6 a {
+  font-size: 14px!important;
+  font-weight: 500;
+  margin: 0;
+  color: #222;
+  font-family:'Oswald';
+  line-height: 18px;
+  text-transform: uppercase;
+  text-aligaln:'center';
+}
+
+.cg-elemen p {
+  font-size: 12px;
+  font-family: 'Oswald';
+  text-align: left;
+  color: #555;
+  line-height: normal;
+  margin: 5px 0;
+}
+
+#cg-loading {
+  color: #888;
+  font-family: inherit;
+  font-size: 100px;
+  letter-spacing: -10px;
+  text-align: center;
+  text-shadow: -5px 0 1px #444;
+  background: #fff url(https://4.bp.blogspot.com/-jSUS8v5kwpQ/U8Z_6Ufr-PI/AAAAAAAAEYY/o4cQPKvt8vQ/s1600/loading.gif) no-repeat 50% 50%;
+  height: 470px;
+}
+
+#cg-navigasifeed {
+  color: #bbb;
+  font-family: Oswald;
+  font-size: 12px;
+  text-align: center;
+  margin: 0px;
+}
+
+#cg-navigasifeed a {
+  color: #141414!important;
+  font-family: inherit!important;
+  font-size: 12px!important;
+  font-weight: 400!important;
+  display: block;
+  padding: 5px 10px;
+}
+
+#cg-navigasifeed span {
+  padding: 5px 10px;
+}
+
+#cg-navigasifeed .next {
+  float: right;
+}
+
+#cg-navigasifeed .previous {
+  float: left;
+}
+
+#cg-navigasifeed .home {
+  text-align: center;
+}
+
+#cg-navigasifeed a:hover,
+#cg-navigasifeed span.noactived {
+  color: transparant!important;
+}
+@media screen and (max-width:700px) {
+    .terbaru-container, #terbaru, #cg-navigasifeed {
+        width:auto;
+    }
+}
+
+
+@media screen and (max-width:300px) {
+    .cg-elemen img {
+        display:none;
+    }
+}
+
+
+Lanjut, Sekarang Tinggal Memasukan Javascriptnya.
+Cari 
+
+</style>
+<div class="terbaru-container">
+    <div id="terbaru"></div>
+    <div id="cg-navigasifeed"></div>
+  </div>
+<!--End Kasworld-aero-->
+
+</div>
+	
+	<div class="column">
+
+<h2>2nd Content Area</h2>
+		<p>Under Cunstruction</p>
+	
+		
+</div>
+  
+  <div class="column">
+		<h2>AMAZON SELL OFFER</h2>
+	 <script type="text/javascript">amzn_assoc_ad_type ="responsive_search_widget"; amzn_assoc_tracking_id ="amzn0b21-21"; amzn_assoc_marketplace ="amazon"; amzn_assoc_region ="IN"; amzn_assoc_placement =""; amzn_assoc_search_type = "search_widget";amzn_assoc_width ="300"; amzn_assoc_height ="610"; amzn_assoc_default_search_category ="Books"; amzn_assoc_default_search_key ="Book";amzn_assoc_theme ="light"; amzn_assoc_bg_color ="FFFFFF"; </script><script src="//z-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&Marketplace=IN"></script>
+	</div>
+	
+</section>	
+	
+	<footer>
+		<h3>Footer</h3>
+		<center> &copy; Copyright 2010-<script>document.write(new Date().getFullYear())</script>, Kasworld-Aero </center>
+	</footer>
+
+</div>
+
+
+
+</body>
+</html>
