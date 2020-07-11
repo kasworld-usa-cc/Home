@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>KASWORLD-AERO</title>
+	<link rel="manifest" href="/manifest.json">
 <style type='text/css'>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -367,7 +368,17 @@ Cari
 
 </div>
 
-
+<script>
+ if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+     }).catch(function(err) {
+        console.log("No it didn't. This happened:", err)
+    });
+ }
+</script>
 
 </body>
 </html>
